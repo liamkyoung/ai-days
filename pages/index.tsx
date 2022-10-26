@@ -7,11 +7,15 @@ import { useDispatch } from 'react-redux'
 import { increment } from '../redux/slices/counterSlice'
 import toast from 'react-hot-toast'
 import { FileUpload } from 'primereact/fileupload'
+import Login from '../components/Login'
+import MongoDBClient from '../lib/mongodbClient'
 
 const Home: NextPage = () => {
   const counterValue = useSelector((state: RootState) => state.counter.value)
   const dispatch = useDispatch()
   const notify = () => toast.success('Here is your toast.', { duration: 7000 })
+
+  // fetch('/api/')
   return (
     <div>
       <Head>
@@ -22,9 +26,8 @@ const Home: NextPage = () => {
 
       <main>
         <h1 className="">Home Page {counterValue}</h1>
-        {/* <button onClick={() => dispatch(increment())}>Click Me</button>
-        <button onClick={notify}>Hi!</button> */}
         <FileUpload name="datasetUpload" url="/api/upload" />
+        <Login />
       </main>
     </div>
   )

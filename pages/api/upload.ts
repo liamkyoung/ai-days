@@ -1,16 +1,8 @@
 import fs from 'fs'
-import AWS from 'aws-sdk'
+import { s3Client } from '../../lib/s3Client'
 import formidable from 'formidable'
 import type { NextApiRequest, NextApiResponse } from 'next'
-
-const s3Client = new AWS.S3({
-  endpoint: process.env.S3_BUCKET_URL,
-  region: process.env.REGION,
-  credentials: {
-    accessKeyId: process.env.AWS_ID,
-    secretAccessKey: process.env.AWS_SECRET,
-  },
-})
+import { PutObjectCommand } from '@aws-sdk/client-s3'
 
 export const config = {
   api: {
@@ -18,7 +10,10 @@ export const config = {
   },
 }
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const form = formidable()
   form.parse(req, async (err, fields, files) => {
     if (!files.datasetUpload) {
@@ -26,19 +21,20 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       return
     }
 
+    const fileName = files.datasetUpload.originalFilename
+
+    const bucketParams = {
+      Bucket: process.env.S3_BUCKET,
+      Key: fileName,
+      Body: fs.createReadStream(files.datasetUpload.filepath),
+    }
     try {
-      return s3Client.putObject(
-        {
-          Bucket: process.env.S3_BUCKET,
-          Key: files.datasetUpload.originalFilename,
-          Body: fs.createReadStream(files.datasetUpload.filepath),
-          ACL: 'public-read',
-        },
-        async () => res.status(201).send('File Uploaded')
-      )
+      const data = await s3Client.send(new PutObjectCommand(bucketParams))
+      res.status(201).send('Successfully uploaded file.')
+      return data
     } catch (e) {
       console.log(e)
-      res.status(500).send('Error uploading file. Check console for errors.')
+      res.status(500).send('Error uploading file.')
     }
   })
 }
