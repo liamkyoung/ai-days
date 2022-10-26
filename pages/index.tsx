@@ -8,12 +8,14 @@ import { increment } from '../redux/slices/counterSlice'
 import toast from 'react-hot-toast'
 import { FileUpload } from 'primereact/fileupload'
 import Login from '../components/Login'
+import MongoDBClient from '../lib/mongodbClient'
 
 const Home: NextPage = () => {
   const counterValue = useSelector((state: RootState) => state.counter.value)
   const dispatch = useDispatch()
   const notify = () => toast.success('Here is your toast.', { duration: 7000 })
 
+  // fetch('/api/')
   return (
     <div>
       <Head>

@@ -10,7 +10,10 @@ export const config = {
   },
 }
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const form = formidable()
   form.parse(req, async (err, fields, files) => {
     if (!files.datasetUpload) {
@@ -18,9 +21,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       return
     }
 
+    const fileName = files.datasetUpload.originalFilename
+
     const bucketParams = {
       Bucket: process.env.S3_BUCKET,
-      Key: files.datasetUpload.originalFilename,
+      Key: fileName,
       Body: fs.createReadStream(files.datasetUpload.filepath),
     }
     try {
