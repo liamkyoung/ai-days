@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { useDispatch } from 'react-redux'
-import { resetUser, setUser, setUserEmail } from '../redux/slices/userSlice'
-import { UserState } from '../lib/types'
+import { resetUser, setUser, setUserEmail } from '../../redux/slices/userSlice'
+import { UserState } from '../../lib/types'
 
 type Props = {}
 
@@ -19,10 +19,6 @@ function Login({}: Props) {
     signIn()
   }
 
-  //   useEffect(() => {
-
-  //   }, [])
-
   if (session) {
     dispatch(setUserEmail(session.user?.email!))
 
@@ -34,16 +30,18 @@ function Login({}: Props) {
 
     return (
       <>
-        Signed in as {session.user?.email} <br />
-        <button onClick={() => handleSignOut()}>Sign out</button>
+        <button className="btn btn-neutral" onClick={() => handleSignOut()}>
+          Sign out
+        </button>
       </>
     )
   }
 
   return (
     <>
-      Not signed in <br />
-      <button onClick={() => handleSignIn()}>Sign in</button>
+      <button className="btn btn-secondary" onClick={() => handleSignIn()}>
+        Sign in
+      </button>
     </>
   )
 }
