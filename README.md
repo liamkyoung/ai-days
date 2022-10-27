@@ -1,5 +1,9 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Our Python code:
+
+https://github.com/richiebailey74/easyAI_ML
+
 ## Getting Started
 
 First, run the development server:
