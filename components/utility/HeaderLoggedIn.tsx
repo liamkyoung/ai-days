@@ -11,13 +11,19 @@ type Props = {
 function HeaderLoggedIn({ photo }: Props) {
   const { data: session } = useSession()
   return (
-    <div className="flex justify-between items-center m-8">
-      <div className="flex items-center">
+    <div className="flex justify-between items-center m-8 font-roboto">
+      <div className="flex justify-center items-center space-x-10">
         <Link href="/">
           <div className="font-bold text-3xl flex-1 mr-16">eAIsy</div>
         </Link>
+        <Link href="/">
+          <h1 className="text-lg hover:font-bold">Home</h1>
+        </Link>
         <Link href="/workspaces">
           <h1 className="text-lg hover:font-bold">Workspaces</h1>
+        </Link>
+        <Link href="/values">
+          <h1 className="text-lg hover:font-bold">Values</h1>
         </Link>
       </div>
 

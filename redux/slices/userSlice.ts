@@ -8,7 +8,7 @@ const initialState: UserState = {
   workspaceIds: [],
   currWorkspace: {
     id: -1,
-    created: new Date(),
+    created: Date.now(),
     data: {},
     trained: false,
     predicted: false,
@@ -32,6 +32,10 @@ export const userSlice = createSlice({
     setCurrWorkspace: (state, action: PayloadAction<WorkSpace>) => {
       state.currWorkspace = action.payload
     },
+
+    setCurrWorkspaceId: (state, action: PayloadAction<number>) => {
+      state.currWorkspace.id = action.payload
+    },
     setAllWorkspaces: (state, action: PayloadAction<number[]>) => {
       state.workspaceIds = action.payload
       // Set Current Workspace to Id. Must search through DB
@@ -46,6 +50,7 @@ export const {
   setUserEmail,
   resetUser,
   setCurrWorkspace,
+  setCurrWorkspaceId,
   setAllWorkspaces,
 } = userSlice.actions
 

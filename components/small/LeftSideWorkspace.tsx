@@ -14,7 +14,7 @@ function LeftSideWorkspace({ step }: Props) {
               step === 1 ? 'bg-slate-600' : 'bg-black'
             }`}
           ></div>
-          <h1 className="font-bold pl-12">General Information</h1>
+          <h1 className="font-bold pl-12">Project Information</h1>
         </div>
 
         <div className="h-48 w-5 border-r-2 border-white my-5"></div>
@@ -31,7 +31,7 @@ function LeftSideWorkspace({ step }: Props) {
         <div className="h-48 w-5 border-r-2 border-white my-5"></div>
         <div className="flex items-center">
           <div
-            className={`h-10 w-10 bg-white rounded-full ${
+            className={`h-10 w-10 rounded-full ${
               step === 3 ? 'bg-slate-600' : 'bg-white'
             }`}
           ></div>

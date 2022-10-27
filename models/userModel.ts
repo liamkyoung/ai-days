@@ -10,7 +10,7 @@ const userSchema: mongoose.Schema = new Schema({
     unique: true,
   },
   workSpaces: {
-    type: [String],
+    type: [Number],
   },
 })
 
