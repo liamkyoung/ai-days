@@ -17,7 +17,7 @@ module.exports = {
         darkBlue: '#4D7298',
       },
     },
-    fontFamily: {},
+    fontFamily: { roboto: ['Roboto', 'sans-serif'] },
   },
   plugins: [require('daisyui')],
 }

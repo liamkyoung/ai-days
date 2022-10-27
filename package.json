@@ -11,8 +11,10 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.196.0",
     "@heroicons/react": "^2.0.12",
+    "@next/font": "^13.0.0",
     "@reduxjs/toolkit": "^1.8.6",
     "@types/formidable": "^2.0.5",
+    "animejs": "^3.2.1",
     "aws-sdk": "^2.1240.0",
     "daisyui": "^2.33.0",
     "formidable": "^2.0.1",

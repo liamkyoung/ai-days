@@ -15,7 +15,7 @@ function WorkspaceSetup({ step }: Props) {
     if (step === 1) setRightSide(<WorkspaceStep1 />)
     if (step === 2) setRightSide(<WorkspaceStep2 />)
     if (step === 3) setRightSide(<WorkspaceFinal />)
-  }, [])
+  }, [step])
 
   return (
     <div>
@@ -24,7 +24,7 @@ function WorkspaceSetup({ step }: Props) {
       </h1>
       <div className="grid grid-cols-3 h-full text-3xl text-white">
         <LeftSideWorkspace step={step} />
-        <div className="col-span-2 bg-black">{rightSide}</div>
+        <div className="col-span-2">{rightSide}</div>
       </div>
     </div>
   )

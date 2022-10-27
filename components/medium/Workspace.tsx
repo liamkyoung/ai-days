@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import WorkspaceHome from './WorkspaceHome'
 import WorkspaceActive from './WorkspaceActive'
+import WorkspaceWait from './WorkspaceWait'
 
 type Props = {}
 
@@ -14,6 +15,7 @@ function Workspace({}: Props) {
     (state: RootState) => state.user.currWorkspace
   )
   const workspaceStep = useSelector((state: RootState) => state.ui.currWS_Step)
+  // const wsValue = useSelector((state: RootState) => state.ui.currWS_ID)
 
   const allWS = [
     { id: -1, text: 'Home' },
@@ -21,10 +23,11 @@ function Workspace({}: Props) {
     { id: 2, text: '2' },
     { id: 0, text: '+' },
   ]
+  console.log(workspaceStep)
   return (
-    <div className="mx-10 my-24 -mb-24 height-75 bg-neutral rounded-md">
+    <div className="mx-10 my-24 -mb-24 height-75 bg-neutral rounded-md shadow-xl">
       {/* Tabs */}
-      <div className="btn-group -translate-y-12 ml-5">
+      <div className="btn-group -translate-y-16 ml-5">
         {allWS.map((ws, i) => (
           <WorkspaceTab
             key={i}
@@ -36,6 +39,7 @@ function Workspace({}: Props) {
       </div>
 
       {/* Body */}
+      {workspaceValue.id === -2 ? <WorkspaceWait /> : null}
       {workspaceValue.id === -1 ? <WorkspaceHome /> : null}
       {workspaceValue.id === 0 && workspaceStep >= 0 ? (
         <WorkspaceSetup step={workspaceStep} />

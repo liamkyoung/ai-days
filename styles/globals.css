@@ -4,10 +4,28 @@
 
 @layer utilities {
   .page {
-    @apply min-h-screen bg-gradient-to-r from-teal-200 to-lime-200 overflow-hidden;
+    @apply min-h-screen bg-gradient-to-r from-teal-200 to-lime-200 overflow-hidden font-roboto;
   }
 }
 
 .height-75 {
   height: 75vh;
+}
+
+.stagger-visualizer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 17rem;
+  height: 17rem;
+  margin-right: 600px;
+}
+
+.stagger-visualizer div {
+  /*position: absolute;*/
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid rgb(52, 52, 52);
+  background-color: rgb(52, 52, 52);
 }

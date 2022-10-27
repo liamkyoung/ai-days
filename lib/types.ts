@@ -13,7 +13,7 @@ export interface UserState {
 
 export interface WorkSpace {
   id: number
-  created: Date
+  created: number
   data: Object
   trained: boolean
   predicted: boolean

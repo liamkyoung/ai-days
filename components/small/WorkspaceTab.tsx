@@ -25,7 +25,7 @@ function WorkspaceTab({ id, text, active }: Props) {
       onClick={() => {
         dispatch(setCurrWorkspace(exWorkspace))
       }}
-      className={`btn ${active ? 'btn-active' : ''}`}
+      className={`btn btn-lg ${active ? 'btn-active' : ''}`}
     >
       {text}
     </button>
