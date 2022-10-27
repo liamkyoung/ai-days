@@ -24,14 +24,15 @@ type Props = {}
 function WorkspaceActive({}: Props) {
   const dispatch = useDispatch()
   const [toggleResults, setResults] = useState(true)
-  const data = useSelector((state: RootState) => state.ui.ai_data)
+  const data = useSelector((state: RootState) => state.ui.copy_data[0])
+
   const left = (
     <div className="text-2xl text-white ml-10 border-2 border-white bg-slate-800 p-10 rounded-md">
       <div className="font-bold space-y-16">
         <h1>&quot;{data.name}&quot;</h1>
         <h1>Created On: {new Date().toDateString()}</h1>
         <h1>Description: {data.description}</h1>
-        <h1>Analysis Type: {data.predOrCluster}</h1>
+        <h1>Data Type: Categoricla</h1>
       </div>
       <div className="flex flex-col justify-end h-96">
         <h1 className="text-center mb-5 font-bold">Actions</h1>

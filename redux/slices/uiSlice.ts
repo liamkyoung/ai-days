@@ -1,12 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { PutBucketAnalyticsConfigurationCommand } from '@aws-sdk/client-s3'
+import d from '../../data/d.json'
 
 export interface UIState {
   currWS_ID: number
   currWS_Step: number
   currUploadFile: string
   ai_data: AI_DATA
+  copy_data: AI_DATA[]
 }
 
 export type AI_DATA = {
@@ -16,6 +18,7 @@ export type AI_DATA = {
   datatype: string
   formatedCorrectly: string
   imageData: boolean
+  data: Object[]
   predOrCluster: boolean
   generativeModel: boolean
   advancedOptions: Object
@@ -29,6 +32,7 @@ const initialState: UIState = {
     name: '',
     description: '',
     file: '',
+    data: d,
     datatype: '',
     formatedCorrectly: '',
     imageData: false,
@@ -36,6 +40,30 @@ const initialState: UIState = {
     generativeModel: false,
     advancedOptions: {},
   },
+  copy_data: [
+    {
+      name: 'First Project',
+      description: 'This is my first project testing diabetes',
+      file: '',
+      datatype: 'Classification',
+      formatedCorrectly: 'columns',
+      imageData: false,
+      predOrCluster: false,
+      generativeModel: false,
+      advancedOptions: {},
+    },
+    {
+      name: '',
+      description: '',
+      file: '',
+      datatype: '',
+      formatedCorrectly: '',
+      imageData: false,
+      predOrCluster: false,
+      generativeModel: false,
+      advancedOptions: {},
+    },
+  ],
 }
 
 export const uiSlice = createSlice({
