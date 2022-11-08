@@ -1,7 +1,7 @@
 import React from 'react'
-import { AI_DATA } from '../../redux/slices/uiSlice'
-import PieChart from '../large/PieChart'
-import Scatterplot from '../large/Scatterplot'
+import { AI_DATA } from '../../lib/constants'
+import CustomPieChart from '../small/PieChart'
+import Scatterplot from '../small/Scatterplot'
 
 type Props = {
   data: AI_DATA
@@ -19,14 +19,14 @@ function Results({ data }: Props) {
       <div className="flex">
         <div className="text-white text-3xl space-y-3">
           <div>
-            Model Accuracy: <b>98.2%</b>
+            Model Accuracy: <b>100%</b>
           </div>
           <div>
             Total Data Points: <b>180</b>
           </div>
           <div></div>
         </div>
-        <PieChart />
+        <CustomPieChart data={data} />
       </div>
     </div>
   )

@@ -1,19 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { UserState, WorkSpace } from '../../lib/types'
+import type { UserState, WorkSpace, AI_DATA } from '../../lib/constants'
 
 const initialState: UserState = {
   id: -1,
   email: '',
-  workspaceIds: [],
-  currWorkspace: {
-    id: -1,
-    created: Date.now(),
-    data: {},
-    trained: false,
-    predicted: false,
-    visualized: false,
-  },
+  workspaces: [],
 }
 
 export const userSlice = createSlice({
@@ -29,17 +21,11 @@ export const userSlice = createSlice({
     resetUser: (state) => {
       state = initialState
     },
-    setCurrWorkspace: (state, action: PayloadAction<WorkSpace>) => {
-      state.currWorkspace = action.payload
-    },
-
     setCurrWorkspaceId: (state, action: PayloadAction<number>) => {
-      state.currWorkspace.id = action.payload
+      state.id = action.payload
     },
-    setAllWorkspaces: (state, action: PayloadAction<number[]>) => {
-      state.workspaceIds = action.payload
-      // Set Current Workspace to Id. Must search through DB
-      // state.currWorkspace = action.payload
+    setAllWorkspaces: (state, action: PayloadAction<WorkSpace[]>) => {
+      state.workspaces = action.payload
     },
   },
 })
@@ -49,7 +35,6 @@ export const {
   setUser,
   setUserEmail,
   resetUser,
-  setCurrWorkspace,
   setCurrWorkspaceId,
   setAllWorkspaces,
 } = userSlice.actions

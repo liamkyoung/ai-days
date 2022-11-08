@@ -9,63 +9,43 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import WorkspaceContainer from '../medium/WorkspaceContainer'
 import { RootState } from '../../redux/store'
+import { defaultData } from '../../lib/constants'
 
 type Props = {}
 
 function WorkspaceStep1({}: Props) {
   const dispatch = useDispatch()
-  const [name, setName] = useState('')
-  const [description, setDescription] = useState('')
   const generalData = useSelector((state: RootState) => state.ui.ai_data)
-  const collectedData: AI_DATA = {
-    name: name,
-    description: description,
-    file: '',
-    datatype: '',
-    formatedCorrectly: '',
-    imageData: false,
-    predOrCluster: false,
-    generativeModel: false,
-    advancedOptions: {},
-  }
-
-  const defaultData: AI_DATA = {
-    name: '',
-    description: '',
-    file: '',
-    datatype: '',
-    formatedCorrectly: '',
-    imageData: false,
-    predOrCluster: false,
-    generativeModel: false,
-    advancedOptions: {},
-  }
 
   const NameInput = (
     <input
       className="rounded-md text-black p-3 w-xs"
-      onChange={(e) => setName(e.target.value)}
-      value={name}
+      onChange={(e) => {
+        dispatch(setGeneralData({ ...generalData, name: e.target.value }))
+      }}
+      value={generalData?.name}
     ></input>
   )
 
   const DescriptionInput = (
     <input
       className="rounded-md text-black p-3 w-xs"
-      onChange={(e) => setDescription(e.target.value)}
-      value={description}
+      onChange={(e) => {
+        dispatch(
+          setGeneralData({ ...generalData, description: e.target.value })
+        )
+      }}
+      value={generalData?.description}
     ></input>
   )
 
   return (
     <div className="">
       <div className="flex justify-center items-center">
-        <div className="font-bold text-3xl text-white -mt-24">
-          Project Information
-        </div>
+        <div className="wsStepTitle -mt-24">Project Information</div>
       </div>
       <div className="justify-between items-center">
-        <div className="flex flex-col items-center bg-slate-800 p-6 rounded-md border-2 border-white mx-24 mb-5">
+        <div className="flex flex-col items-center wsContainer mb-5">
           <div>
             <h1 className="text-2xl font-bold underline mb-5 mr-5">Name</h1>
             <div className="flex space-x-2 items-center"></div>
@@ -73,7 +53,7 @@ function WorkspaceStep1({}: Props) {
           {NameInput}
         </div>
 
-        <div className="flex flex-col items-center bg-slate-800 p-8 rounded-md border-2 border-white mx-24 mb-5">
+        <div className="flex flex-col items-center wsContainer">
           <div>
             <h1 className="text-2xl font-bold underline mb-5 mr-5">
               Description
@@ -84,7 +64,7 @@ function WorkspaceStep1({}: Props) {
         </div>
       </div>
 
-      <div className="bg-slate-800 p-8 rounded-md border-2 border-white mx-24 mb-5">
+      <div className="wsContainer mb-5">
         <h1 className="text-2xl font-bold underline mb-5 text-center">
           Upload A Dataset
         </h1>
@@ -105,7 +85,7 @@ function WorkspaceStep1({}: Props) {
           className="btn btn-info btn-lg"
           onClick={() => {
             dispatch(incrementStep())
-            dispatch(setGeneralData(collectedData))
+            dispatch(setGeneralData(defaultData))
           }}
         >
           Continue

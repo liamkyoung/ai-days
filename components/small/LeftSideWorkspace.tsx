@@ -18,6 +18,7 @@ function LeftSideWorkspace({ step }: Props) {
         </div>
 
         <div className="h-48 w-5 border-r-2 border-white my-5"></div>
+
         <div className="flex items-center">
           <div
             className={`h-10 w-10 rounded-full ${

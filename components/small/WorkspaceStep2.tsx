@@ -4,45 +4,34 @@ import {
   decrementStep,
   incrementStep,
   setGeneralData,
-  AI_DATA,
 } from '../../redux/slices/uiSlice'
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/solid'
 import WorkspaceContainer from '../medium/WorkspaceContainer'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
+import defaultData from '../../lib/constants'
 
 type Props = {}
 
 function WorkspaceStep2({}: Props) {
-  const [dataType, setDataType] = useState('numerical')
-  const [format, setFormat] = useState('columns')
-  const [image, setImage] = useState(false)
-  const [prediction, setPrediction] = useState(false)
   const generalData = useSelector((state: RootState) => state.ui.ai_data)
 
-  const collectedData: AI_DATA = {
-    name: generalData.name,
-    description: generalData.description,
-    file: generalData.file,
-    datatype: dataType,
-    formatedCorrectly: format,
-    imageData: image,
-    predOrCluster: prediction,
-    generativeModel: false,
-    advancedOptions: {},
-  }
-
   const dispatch = useDispatch()
-  const DataTypeCheckbox = (
+  const DataTypeCheckbox = () => (
     <div>
       <div className="form-control rounded-lg">
         <label
-          onClick={() => setDataType('numerical')}
+          onClick={() => {
+            if (generalData.datatype !== 'numerical')
+              dispatch(
+                setGeneralData({ ...generalData, datatype: 'numerical' })
+              )
+          }}
           className="label cursor-pointer"
         >
           <h1
             className={`label-text text-white text-xl ${
-              dataType === 'numerical' ? 'font-bold' : ''
+              generalData.datatype === 'numerical' ? 'font-bold' : ''
             } mr-5`}
           >
             Numerical
@@ -51,18 +40,22 @@ function WorkspaceStep2({}: Props) {
             type="radio"
             name="radio-6"
             className="radio checked:bg-green-500 bg-zinc-100"
-            checked={dataType === 'numerical' ? true : false}
+            checked={generalData.datatype === 'numerical' ? true : false}
           />
         </label>
       </div>
       <div className="form-control">
         <label
-          onClick={() => setDataType('categorical')}
+          onClick={() =>
+            dispatch(
+              setGeneralData({ ...generalData, datatype: 'categorical' })
+            )
+          }
           className="label cursor-pointer"
         >
           <h1
             className={`label-text text-white text-xl ${
-              dataType === 'categorical' ? 'font-bold' : ''
+              generalData.datatype === 'categorical' ? 'font-bold' : ''
             } mr-5`}
           >
             Categorical
@@ -71,23 +64,25 @@ function WorkspaceStep2({}: Props) {
             type="radio"
             name="radio-6"
             className="radio checked:bg-green-500 bg-zinc-100"
-            checked={dataType === 'categorical' ? true : false}
+            checked={generalData.datatype === 'categorical' ? true : false}
           />
         </label>
       </div>
     </div>
   )
 
-  const FormatCheckbox = (
+  const FormatCheckbox = () => (
     <div>
       <div className="form-control">
         <label
-          onClick={() => setFormat('columns')}
+          onClick={() =>
+            dispatch(setGeneralData({ ...generalData, format: 'columns' }))
+          }
           className="label cursor-pointer"
         >
           <h1
             className={`label-text text-white text-xl ${
-              format === 'columns' ? 'font-bold' : ''
+              generalData.format === 'columns' ? 'font-bold' : ''
             } mr-5`}
           >
             Features as Columns
@@ -96,40 +91,47 @@ function WorkspaceStep2({}: Props) {
             type="radio"
             name="radio-8"
             className="radio checked:bg-green-500 bg-zinc-100"
-            checked={format === 'columns' ? true : false}
+            checked={generalData.format === 'columns' ? true : false}
           />
         </label>
       </div>
       <div className="form-control rounded-lg">
         <label
-          onClick={() => setFormat('rows')}
+          onClick={() =>
+            dispatch(setGeneralData({ ...generalData, format: 'rows' }))
+          }
           className="label cursor-pointer"
         >
           <h1
             className={`label-text text-white text-xl ${
-              format === 'rows' ? 'font-bold' : ''
+              generalData.format === 'rows' ? 'font-bold' : ''
             } mr-5`}
           >
             Features as Rows
           </h1>
           <input
             type="radio"
-            name="radio-7"
+            name="radio-0"
             className="radio checked:bg-green-500 bg-zinc-100"
-            checked={format === 'rows' ? true : false}
+            checked={generalData.format === 'rows' ? true : false}
           />
         </label>
       </div>
     </div>
   )
 
-  const ImageData = (image: boolean) => (
+  const ImageData = () => (
     <div>
       <div className="form-control">
-        <label onClick={() => setImage(true)} className="label cursor-pointer">
+        <label
+          onClick={() =>
+            dispatch(setGeneralData({ ...generalData, imageData: true }))
+          }
+          className="label cursor-pointer"
+        >
           <h1
             className={`label-text text-white text-xl ${
-              image ? 'font-bold' : ''
+              generalData.imageData ? 'font-bold' : ''
             } mr-5`}
           >
             Yes
@@ -138,15 +140,20 @@ function WorkspaceStep2({}: Props) {
             type="radio"
             name="radio-11"
             className="radio checked:bg-green-500 bg-zinc-100"
-            checked={image}
+            checked={generalData.imageData}
           />
         </label>
       </div>
       <div className="form-control rounded-lg">
-        <label onClick={() => setImage(false)} className="label cursor-pointer">
+        <label
+          onClick={() =>
+            dispatch(setGeneralData({ ...generalData, imageData: false }))
+          }
+          className="label cursor-pointer"
+        >
           <h1
             className={`label-text text-white text-xl ${
-              !image ? 'font-bold' : ''
+              !generalData.imageData ? 'font-bold' : ''
             } mr-5`}
           >
             No
@@ -155,23 +162,25 @@ function WorkspaceStep2({}: Props) {
             type="radio"
             name="radio-12"
             className="radio checked:bg-green-500 bg-zinc-100"
-            checked={!image}
+            checked={!generalData.imageData}
           />
         </label>
       </div>
     </div>
   )
 
-  const Prediction = (prediction: boolean) => (
+  const Prediction = () => (
     <div>
       <div className="form-control">
         <label
-          onClick={() => setPrediction(true)}
+          onClick={() =>
+            dispatch(setGeneralData({ ...generalData, predOrCluster: true }))
+          }
           className="label cursor-pointer"
         >
           <h1
             className={`label-text text-white text-xl ${
-              prediction ? 'font-bold' : ''
+              generalData.predOrCluster ? 'font-bold' : ''
             } mr-5`}
           >
             Prediction
@@ -180,18 +189,20 @@ function WorkspaceStep2({}: Props) {
             type="radio"
             name="radio-8"
             className="radio checked:bg-green-500 bg-zinc-100"
-            checked={prediction}
+            checked={generalData.predOrCluster}
           />
         </label>
       </div>
       <div className="form-control rounded-lg">
         <label
-          onClick={() => setPrediction(false)}
+          onClick={() =>
+            dispatch(setGeneralData({ ...generalData, predOrCluster: false }))
+          }
           className="label cursor-pointer"
         >
           <h1
             className={`label-text text-white text-xl ${
-              !prediction ? 'font-bold' : ''
+              !generalData.predOrCluster ? 'font-bold' : ''
             } mr-5`}
           >
             Clustering
@@ -200,7 +211,7 @@ function WorkspaceStep2({}: Props) {
             type="radio"
             name="radio-7"
             className="radio checked:bg-green-500 bg-zinc-100"
-            checked={!prediction}
+            checked={!generalData.predOrCluster}
           />
         </label>
       </div>
@@ -210,9 +221,7 @@ function WorkspaceStep2({}: Props) {
   return (
     <div>
       <div className="flex justify-center items-center mb-10">
-        <div className="font-bold text-3xl text-white">
-          Tell Us About Your Data
-        </div>
+        <div className="wsStepTitle">Tell Us About Your Data</div>
       </div>
 
       {/* */}
@@ -222,23 +231,21 @@ function WorkspaceStep2({}: Props) {
           helpText="Data is usually classified into 2 categories: numerical
               &#40;number-based&#41;, and categorical &#40;&#41;"
           help={true}
-          left={DataTypeCheckbox}
+          left={DataTypeCheckbox()}
         />
 
         <WorkspaceContainer
           title="Target Data Type"
-          helpText="Data is usually classified into 2 categories: numerical
-              &#40;number-based&#41;, and categorical &#40;&#41;"
+          helpText="Your data will be formatted such that either each row is a sample or each column is a sample."
           help={true}
-          left={FormatCheckbox}
+          left={FormatCheckbox()}
         />
 
         <WorkspaceContainer
           title="Image Data"
-          helpText="Data is usually classified into 2 categories: numerical
-              &#40;number-based&#41;, and categorical &#40;&#41;"
+          helpText="Is your data an image?"
           help={true}
-          left={ImageData(image)}
+          left={ImageData()}
         />
 
         <WorkspaceContainer
@@ -246,7 +253,7 @@ function WorkspaceStep2({}: Props) {
           helpText="Data is usually classified into 2 categories: numerical
               &#40;number-based&#41;, and categorical &#40;&#41;"
           help={true}
-          left={Prediction(prediction)}
+          left={Prediction()}
         />
       </div>
 
@@ -263,7 +270,6 @@ function WorkspaceStep2({}: Props) {
           className="btn btn-info btn-lg"
           onClick={() => {
             dispatch(incrementStep())
-            dispatch(setGeneralData(collectedData))
           }}
         >
           Continue

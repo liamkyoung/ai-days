@@ -5,15 +5,14 @@ const resultsSchema: mongoose.Schema = new Schema({
     type: String,
   },
   projectData: {
-    id: {
-      type: Number,
-      unique: true,
-      increment: true,
+    name: {
+      type: String,
+      required: true,
     },
-    name: String,
     description: String,
     file: String,
     datatype: String,
+    data: [Object],
     formatedCorrectly: String,
     imageData: Boolean,
     predOrCluster: Boolean,

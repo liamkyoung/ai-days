@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { setCurrWorkspace } from '../../redux/slices/userSlice'
-import type { WorkSpace } from '../../lib/types'
+import { setCurrWS_ID } from '../../redux/slices/uiSlice'
+import type { WorkSpace } from '../../lib/constants'
 
 type Props = {
   id: number
@@ -11,19 +11,10 @@ type Props = {
 
 function WorkspaceTab({ id, text, active }: Props) {
   const dispatch = useDispatch()
-  const exWorkspace: WorkSpace = {
-    id: id,
-    created: new Date(),
-    data: {},
-    trained: false,
-    predicted: false,
-    visualized: false,
-  }
-
   return (
     <button
       onClick={() => {
-        dispatch(setCurrWorkspace(exWorkspace))
+        dispatch(setCurrWS_ID(id))
       }}
       className={`btn btn-lg ${active ? 'btn-active' : ''}`}
     >

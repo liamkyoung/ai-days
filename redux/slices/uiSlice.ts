@@ -2,32 +2,14 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { PutBucketAnalyticsConfigurationCommand } from '@aws-sdk/client-s3'
 import d from '../../data/d.json'
-
-export interface UIState {
-  currWS_ID: number
-  currWS_Step: number
-  currUploadFile: string
-  ai_data: AI_DATA
-  copy_data: AI_DATA[]
-}
-
-export type AI_DATA = {
-  name: string
-  description: string
-  file: string
-  datatype: string
-  formatedCorrectly: string
-  imageData: boolean
-  data: Object[]
-  predOrCluster: boolean
-  generativeModel: boolean
-  advancedOptions: Object
-}
+import { AI_DATA } from '../../lib/constants'
+import { UIState } from '../../lib/constants'
 
 const initialState: UIState = {
   currWS_ID: -1,
   currWS_Step: 1,
   currUploadFile: '',
+  currPage: 'Home',
   ai_data: {
     name: '',
     description: '',
@@ -40,30 +22,6 @@ const initialState: UIState = {
     generativeModel: false,
     advancedOptions: {},
   },
-  copy_data: [
-    {
-      name: 'First Project',
-      description: 'This is my first project testing diabetes',
-      file: '',
-      datatype: 'Classification',
-      formatedCorrectly: 'columns',
-      imageData: false,
-      predOrCluster: false,
-      generativeModel: false,
-      advancedOptions: {},
-    },
-    {
-      name: '',
-      description: '',
-      file: '',
-      datatype: '',
-      formatedCorrectly: '',
-      imageData: false,
-      predOrCluster: false,
-      generativeModel: false,
-      advancedOptions: {},
-    },
-  ],
 }
 
 export const uiSlice = createSlice({
@@ -88,6 +46,9 @@ export const uiSlice = createSlice({
     setFileName: (state, action: PayloadAction<string>) => {
       state.currUploadFile = action.payload
     },
+    setCurrPage: (state, action: PayloadAction<string>) => {
+      state.currPage = action.payload
+    },
   },
 })
 
@@ -99,6 +60,7 @@ export const {
   setStep,
   setGeneralData,
   setFileName,
+  setCurrPage,
 } = uiSlice.actions
 
 export default uiSlice.reducer

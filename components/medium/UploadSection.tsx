@@ -11,7 +11,7 @@ function UploadSection({}: Props) {
   return (
     <div className="space-y-3 flex flex-col justify-center items-center">
       <button
-        onClick={() => dispatch(setCurrWorkspaceId(0))}
+        onClick={() => dispatch(setCurrWS_ID(0))}
         className="btn btn-success hover:btn-primary btn-lg"
       >
         Create New Workspace

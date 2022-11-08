@@ -1,7 +1,8 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
+import { AI_DATA } from '../../lib/constants'
 
 const COLORS = ['#0088FE', '#00C49F']
 const data = [
@@ -605,25 +606,27 @@ const dataPass = [
   { name: 'No Diabetes', value: no_diabetes },
 ]
 
-export default class Example extends PureComponent {
-  render() {
-    return (
-      <PieChart width={800} height={400} onMouseEnter={(e) => console.log(e)}>
-        <Pie
-          data={dataPass}
-          cx={120}
-          cy={200}
-          innerRadius={60}
-          outerRadius={80}
-          fill="#8884d8"
-          paddingAngle={5}
-          dataKey="value"
-        >
-          {dataPass.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-      </PieChart>
-    )
-  }
+type Props = {
+  data: AI_DATA
+}
+
+export default function CustomPieChart({ data }: Props) {
+  return (
+    <PieChart width={800} height={400} onMouseEnter={(e) => console.log(e)}>
+      <Pie
+        data={dataPass}
+        cx={120}
+        cy={200}
+        innerRadius={60}
+        outerRadius={80}
+        fill="#8884d8"
+        paddingAngle={5}
+        dataKey="value"
+      >
+        {dataPass.map((entry, index) => (
+          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+        ))}
+      </Pie>
+    </PieChart>
+  )
 }

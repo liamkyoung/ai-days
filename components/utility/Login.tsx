@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { useDispatch } from 'react-redux'
 import { resetUser, setUser, setUserEmail } from '../../redux/slices/userSlice'
-import { UserState } from '../../lib/types'
+import { UserState } from '../../lib/constants'
 
 type Props = {}
 

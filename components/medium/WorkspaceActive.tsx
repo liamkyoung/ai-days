@@ -18,21 +18,30 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/solid'
 import Results from '../medium/Results'
+import { defaultData, WorkSpace } from '../../lib/constants'
 
 type Props = {}
 
 function WorkspaceActive({}: Props) {
   const dispatch = useDispatch()
   const [toggleResults, setResults] = useState(true)
-  const data = useSelector((state: RootState) => state.ui.copy_data[0])
+  const currId = useSelector((state: RootState) => state.ui.currWS_ID)
+  const allData: WorkSpace[] = useSelector(
+    (state: RootState) => state.user.workspaces
+  )
+
+  const workspace: WorkSpace = allData.find((ws) => ws.id === currId) || {
+    id: -2,
+    data: defaultData,
+  }
 
   const left = (
     <div className="text-2xl text-white ml-10 border-2 border-white bg-slate-800 p-10 rounded-md">
       <div className="font-bold space-y-16">
-        <h1>&quot;{data.name}&quot;</h1>
+        <h1>&quot;{workspace?.data.name}&quot;</h1>
         <h1>Created On: {new Date().toDateString()}</h1>
-        <h1>Description: {data.description}</h1>
-        <h1>Data Type: Categoricla</h1>
+        <h1>Description: {workspace?.data.description}</h1>
+        <h1>Data Type: Categorical</h1>
       </div>
       <div className="flex flex-col justify-end h-96">
         <h1 className="text-center mb-5 font-bold">Actions</h1>
@@ -48,26 +57,10 @@ function WorkspaceActive({}: Props) {
     </div>
   )
 
-  /*
-  
-    name: '',
-    description: '',
-    file: '',
-    datatype: '',
-    formatedCorrectly: '',
-    imageData: false,
-    predOrCluster: false,
-    generativeModel: false,
-    advancedOptions: {},
-  */
-
   return (
     <div className="flex justify-between">
-      {/* <div className="w-full flex justify-end -mt-10 pr-5">
-        <XMarkIcon className="h-12 text-red-700 bg-gray-800 rounded-full " />
-      </div> */}
       {left}
-      <Results data={data} />
+      <Results data={workspace?.data} />
     </div>
   )
 }

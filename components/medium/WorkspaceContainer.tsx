@@ -10,7 +10,7 @@ type Props = {
 
 function WorkspaceContainer({ title, helpText, left, help }: Props) {
   return (
-    <div className="flex justify-between bg-slate-800 p-10 rounded-md border-2 border-white mx-24 mb-5">
+    <div className="flex justify-between p-10 wsContainer mb-5">
       <div>
         <h1 className="text-2xl font-bold underline mb-5 mr-5">{title}</h1>
         <div className="flex space-x-2 items-center">

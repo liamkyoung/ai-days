@@ -41,24 +41,24 @@ function WorkspaceFinal({}: Props) {
   return (
     <div>
       <div className="flex justify-center">
-        <h1 className="text-4xl font-bold">Summary</h1>
+        <h1 className="wsStepTitle">Summary</h1>
       </div>
-      <div className="bg-slate-800 m-24 flex space-x-24 p-24 rounded-lg border-2 border-white">
+      <div className="wsContainer flex space-x-24 mt-24">
         <div className="space-y-7 w-1/2">
           <h1 className="underline font-bold text-3xl mb-5">
             Project Information
           </h1>
           <div className="flex space-between">
             <h1 className="flex-1">Name: </h1>
-            <h1 className="italic">{ws.name}</h1>
+            <h1 className="italic">{ws?.name}</h1>
           </div>
           <div className="flex space-between">
             <h1 className="flex-1">Description: </h1>
-            <h1 className="italic">{ws.description}</h1>
+            <h1 className="italic">{ws?.description}</h1>
           </div>
           <div className="flex space-between">
             <h1 className="flex-1">Data File: </h1>
-            <h1 className="italic">{ws.file}</h1>
+            <h1 className="italic">{ws?.file}</h1>
           </div>
         </div>
         <div className="border-2 border-l-white bg-white my-5 rounded-lg"></div>
@@ -68,28 +68,28 @@ function WorkspaceFinal({}: Props) {
           </h1>
           <div className="flex space-between">
             <h1 className="flex-1">Data Type: </h1>
-            <h1 className="italic">{ws.datatype.toString().toUpperCase()}</h1>
+            <h1 className="italic">{ws?.datatype.toString().toUpperCase()}</h1>
           </div>
           <div className="flex space-between">
             <h1 className="flex-1">Feature Format: </h1>
             <h1 className="italic">
-              {ws.formatedCorrectly.toString().toUpperCase()}
+              {ws?.formatedCorrectly.toString().toUpperCase()}
             </h1>
           </div>
           <div className="flex space-between">
             <h1 className="flex-1">Image Data: </h1>
-            <h1 className="italic">{ws.imageData.toString().toUpperCase()}</h1>
+            <h1 className="italic">{ws?.imageData.toString().toUpperCase()}</h1>
           </div>
           <div className="flex space-between">
             <h1 className="flex-1">Analysis Type: </h1>
             <h1 className="italic">
-              {ws.predOrCluster ? 'PREDICTION' : 'CLUSTERING'}
+              {ws?.predOrCluster ? 'PREDICTION' : 'CLUSTERING'}
             </h1>
           </div>
           <div className="flex space-between">
             <h1 className="flex-1">Generative Model: </h1>
             <h1 className="italic">
-              {ws.predOrCluster.toString().toUpperCase()}
+              {ws?.predOrCluster.toString().toUpperCase()}
             </h1>
           </div>
         </div>

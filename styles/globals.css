@@ -6,10 +6,26 @@
   .page {
     @apply min-h-screen bg-gradient-to-r from-teal-200 to-lime-200 overflow-hidden font-roboto;
   }
+
+  .valueEmojis {
+    @apply h-16 text-slate-800;
+  }
+
+  .wsStepTitle {
+    @apply font-bold text-3xl text-white;
+  }
+
+  .wsContainer {
+    @apply bg-slate-800 p-8 rounded-md border-2 border-white mx-24 mb-5 min-h-fit min-w-fit;
+  }
 }
 
 .height-75 {
   height: 75vh;
+}
+
+.max-h-80 {
+  max-height: 80vh;
 }
 
 .stagger-visualizer {
