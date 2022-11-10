@@ -4,7 +4,7 @@ import {
   incrementStep,
   setStep,
 } from '../../redux/slices/uiSlice'
-import { setCurrWorkspaceId } from '../../redux/slices/userSlice'
+import { setCurrWS_ID } from '../../redux/slices/uiSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import toast from 'react-hot-toast'
@@ -72,9 +72,7 @@ function WorkspaceFinal({}: Props) {
           </div>
           <div className="flex space-between">
             <h1 className="flex-1">Feature Format: </h1>
-            <h1 className="italic">
-              {ws?.formatedCorrectly.toString().toUpperCase()}
-            </h1>
+            <h1 className="italic">{ws?.format.toString().toUpperCase()}</h1>
           </div>
           <div className="flex space-between">
             <h1 className="flex-1">Image Data: </h1>
@@ -109,7 +107,7 @@ function WorkspaceFinal({}: Props) {
           <button
             className="btn btn-success hover:btn-primary btn-lg"
             onClick={() => {
-              dispatch(setCurrWorkspaceId(-2))
+              dispatch(setCurrWS_ID(-2))
               dispatch(setStep(1))
               fetch('/api/generateResults', requestOptions)
                 .then((response) => response.text())

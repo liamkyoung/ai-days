@@ -9,7 +9,6 @@ import { QuestionMarkCircleIcon } from '@heroicons/react/24/solid'
 import WorkspaceContainer from '../medium/WorkspaceContainer'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
-import defaultData from '../../lib/constants'
 
 type Props = {}
 
@@ -231,21 +230,21 @@ function WorkspaceStep2({}: Props) {
           helpText="Data is usually classified into 2 categories: numerical
               &#40;number-based&#41;, and categorical &#40;&#41;"
           help={true}
-          left={DataTypeCheckbox()}
+          left={<DataTypeCheckbox />}
         />
 
         <WorkspaceContainer
           title="Target Data Type"
           helpText="Your data will be formatted such that either each row is a sample or each column is a sample."
           help={true}
-          left={FormatCheckbox()}
+          left={<FormatCheckbox />}
         />
 
         <WorkspaceContainer
           title="Image Data"
           helpText="Is your data an image?"
           help={true}
-          left={ImageData()}
+          left={<ImageData />}
         />
 
         <WorkspaceContainer
@@ -253,7 +252,7 @@ function WorkspaceStep2({}: Props) {
           helpText="Data is usually classified into 2 categories: numerical
               &#40;number-based&#41;, and categorical &#40;&#41;"
           help={true}
-          left={Prediction()}
+          left={<Prediction />}
         />
       </div>
 

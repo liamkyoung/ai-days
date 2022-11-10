@@ -11,22 +11,12 @@ import {
   setCurrWorkspace,
   setCurrWorkspaceId,
 } from '../../redux/slices/userSlice'
+import { defaultData } from '../../lib/constants'
 
 type Props = {}
 
 function WorkspaceWait({}: Props) {
   const dispatch = useDispatch()
-  const defaultData: AI_DATA = {
-    name: '',
-    description: '',
-    file: '',
-    datatype: '',
-    formatedCorrectly: '',
-    imageData: false,
-    predOrCluster: false,
-    generativeModel: false,
-    advancedOptions: {},
-  }
   return (
     <div className="text-white flex flex-col items-center justify-center">
       <div className="text-center mb-5">

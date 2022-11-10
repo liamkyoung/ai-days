@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import FileUploader from '../utility/FileUploader'
-import { setCurrWorkspaceId } from '../../redux/slices/userSlice'
+import { setCurrWS_ID } from '../../redux/slices/uiSlice'
 import {
   incrementStep,
   AI_DATA,
@@ -75,8 +75,7 @@ function WorkspaceStep1({}: Props) {
         <button
           className="btn btn-error btn-lg"
           onClick={() => {
-            dispatch(setCurrWorkspaceId(-1))
-            dispatch(setGeneralData(defaultData))
+            dispatch(setCurrWS_ID(-1))
           }}
         >
           Exit
@@ -85,7 +84,6 @@ function WorkspaceStep1({}: Props) {
           className="btn btn-info btn-lg"
           onClick={() => {
             dispatch(incrementStep())
-            dispatch(setGeneralData(defaultData))
           }}
         >
           Continue
